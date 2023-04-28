@@ -1,5 +1,4 @@
 #include "knight2.h"
-
 /* * * BEGIN implementation of class BaseBag * * */
 
 /* * * END implementation of class BaseBag * * */
@@ -20,6 +19,7 @@ string BaseKnight::toString() const {
         + "]";
     return s;
 }
+
 
 /* * * END implementation of class BaseKnight * * */
 

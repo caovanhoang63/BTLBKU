@@ -33,11 +33,51 @@ public:
     static BaseKnight* create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI);
     string toString() const;
 };
-
+BaseKnight* BaseKnight::create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI) {
+    BaseKnight* temp;
+    temp->id = id;
+    temp->maxhp = maxhp;
+    temp->level = level;
+    temp->gil = gil;
+    temp->antidote = antidote;
+};
+class LancelotKnight : public BaseKnight{
+public:
+    LancelotKnight() {
+        this->knightType = LANCELOT;
+   }
+};
+class DragonKnight : public BaseKnight {
+public:
+    DragonKnight() {
+        this->knightType = DRAGON;
+    }
+};
+class PaladinKnight : public BaseKnight {
+public:
+    PaladinKnight() {
+        this->knightType = PALADIN;
+    }
+};
+class NormalKnight : public BaseKnight {
+public:
+    NormalKnight() {
+        this->knightType = NORMAL;
+    }
+};
 class ArmyKnights {
 public:
-    ArmyKnights(const string& file_armyknights);
+    static int knightid;
+    ArmyKnights(const string& file_armyknights) {
+        int quanlity;
+        ifstream input(file_armyknights, ios::in);
+        input >> quanlity;
+        int id,maxhp
+
+
+    };
     ~ArmyKnights();
+    BaseKnight** Army;
     bool fight(BaseOpponent* opponent);
     bool adventure(Events* events);
     int count() const;
@@ -51,7 +91,6 @@ public:
     void printInfo() const;
     void printResult(bool win) const;
 };
-
 class BaseItem {
 public:
     virtual bool canUse(BaseKnight* knight) = 0;
@@ -59,9 +98,28 @@ public:
 };
 
 class Events {
+private:
+    int* arr;
+    int size;
 public:
+    Events(string s);
     int count() const;
     int get(int i) const;
+    ~Events();
+};
+Events::Events(string s) {
+    ifstream input(s, ios::in);
+    input >> size;
+    arr = new int[size + 1];
+    for (int i = 0; i < size; i++) {
+        input >> *(arr + i);
+    }
+};
+int Events::count() const {
+    return size;
+};
+int Events::get(int i) const {
+    return arr[size];
 };
 
 class KnightAdventure {
