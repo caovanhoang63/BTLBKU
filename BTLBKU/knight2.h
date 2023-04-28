@@ -6,6 +6,15 @@
 
 // #define DEBUG
 
+// Kiem tra nguyen to
+bool isPrime(int x) {
+    if (x <= 1)
+        return 0;
+    for (int i = 2; i * i <= x; i++)
+        if (x % i == 0)
+            return 0;
+    return 1;
+}
 enum ItemType {/* TODO: */ };
 
 class BaseBag {
@@ -35,11 +44,24 @@ public:
 };
 BaseKnight* BaseKnight::create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI) {
     BaseKnight* temp;
+    if (isPrime(temp->maxhp)) {
+        temp = new PaladinKnight;
+    }
+    else if (maxhp == 888) {
+        temp = new LancelotKnight;
+    }
+    else if (maxhp == 345 || maxhp == 354 || maxhp == 435 || maxhp == 453 || maxhp == 534 || maxhp == 543) {
+        temp = new DragonKnight;
+    }
+    else {
+        temp = new NormalKnight;
+    }
     temp->id = id;
     temp->maxhp = maxhp;
     temp->level = level;
     temp->gil = gil;
     temp->antidote = antidote;
+    return temp;
 };
 class LancelotKnight : public BaseKnight{
 public:
@@ -71,10 +93,16 @@ public:
     ArmyKnights(const string& file_armyknights) {
         int quanlity;
         ifstream input(file_armyknights, ios::in);
+        if (input.fail()) {
+            cout << "Fail";
+            return;
+        }
         input >> quanlity;
-        int id,maxhp
-
-
+        int id, maxhp, level, gil, antidote, phoenixdownI;
+        input >> id >> maxhp >> level >> phoenixdownI >> gil >> antidote;
+        for (id = 1; id <= quanlity; id++) {
+            *(Army + id - 1) = BaseKnight::create(id, maxhp, level, gil, antidote, phoenixdownI);
+        }
     };
     ~ArmyKnights();
     BaseKnight** Army;

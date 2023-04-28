@@ -30,4 +30,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\A2_initial-1\tc1_armyknights">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

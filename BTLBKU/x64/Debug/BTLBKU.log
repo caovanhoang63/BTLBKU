@@ -1,0 +1,15 @@
+﻿  knight2.cpp
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(22,30): error C2061: syntax error: identifier 'BaseItem'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C2433: 'BaseBag::BaseItem': 'virtual' not permitted on data declarations
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,45): error C2238: unexpected token(s) preceding ';'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(113,20): error C2061: syntax error: identifier 'Events'
+  main.cpp
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(22,30): error C2061: syntax error: identifier 'BaseItem'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C2433: 'BaseBag::BaseItem': 'virtual' not permitted on data declarations
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,45): error C2238: unexpected token(s) preceding ';'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(113,20): error C2061: syntax error: identifier 'Events'
+  Generating Code...
