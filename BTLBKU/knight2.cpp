@@ -21,6 +21,7 @@ string BaseKnight::toString() const {
 }
 
 
+
 /* * * END implementation of class BaseKnight * * */
 
 /* * * BEGIN implementation of class ArmyKnights * * */

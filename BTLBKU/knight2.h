@@ -15,7 +15,7 @@ bool isPrime(int x) {
             return 0;
     return 1;
 }
-enum ItemType {/* TODO: */ };
+enum ItemType {Antidote=0,PhoenixdownI, PhoenixdownII, PhoenixdownIII, PhoenixdownIV};
 
 class BaseBag {
 public:
@@ -24,7 +24,80 @@ public:
     virtual string toString() const;
 };
 
-class BaseOpponent;
+class BaseOpponent {
+protected:
+    int gil;
+    int baseDamage;
+    int levelO;
+    int eventid;
+public:
+    virtual int setlevelO(int i) = 0;
+};
+class MadBear : public BaseOpponent {
+public:
+    MadBear() {
+        this->baseDamage = 10;
+        this->gil = 100;
+        this->eventid = 1;
+    }
+    ~MadBear();
+    int setlevelO(int i) {
+        this->levelO = (i + eventid) % 10 + 1;
+        return this->levelO;
+    }
+};
+class Bandit : public BaseOpponent {
+public:
+    Bandit() {
+        this->baseDamage = 15;
+        this->gil = 150;
+        this->eventid = 2;
+    }
+    ~Bandit();
+    int setlevelO(int i) {
+        this->levelO = (i + eventid) % 10 + 1;
+        return this->levelO;
+    }
+};
+class LordLupin : public BaseOpponent {
+public:
+    LordLupin() {
+        this->baseDamage = 45;
+        this->gil = 450;
+        this->eventid = 3;
+    }
+    ~LordLupin();
+    int setlevelO(int i) {
+        this->levelO = (i + eventid) % 10 + 1;
+        return this->levelO;
+    }
+};
+class Elf : public BaseOpponent {
+public:
+    Elf() {
+        this->baseDamage = 75;
+        this->gil = 750;
+        this->eventid = 4;
+    }
+    ~Elf();
+    int setlevelO(int i) {
+        this->levelO = (i + eventid) % 10 + 1;
+        return this->levelO;
+    }
+};
+class Troll : public BaseOpponent {
+public:
+    Troll() {
+        this->baseDamage = 95;
+        this->gil = 800;
+        this->eventid = 5;
+    }
+    ~Troll();
+    int setlevelO(int i) {
+        this->levelO = (i + eventid) % 10 + 1;
+        return this->levelO;
+    }
+};
 
 enum KnightType { PALADIN = 0, LANCELOT, DRAGON, NORMAL };
 class BaseKnight {
@@ -35,12 +108,44 @@ protected:
     int level;
     int gil;
     int antidote;
+    bool poison;
     BaseBag* bag;
     KnightType knightType;
 
 public:
+    BaseKnight() {
+        this->poison = false;
+    }
+    ~BaseKnight();
     static BaseKnight* create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI);
     string toString() const;
+    int const getmaxhp() {
+        return this->maxhp;
+    }
+    int const gethp() {
+        return this->hp;
+    }
+    int const getlevel() {
+        return this->level;
+    }
+    int const getgil() {
+        return this->gil;
+    }
+    int const getantidote() {
+        return this->antidote;
+    }
+    bool const getpoison() {
+        return this->poison;
+    }
+    void setpoison(bool poison) {
+        this->poison = poison;
+    }
+    void setantidote(int antidote) {
+        this->antidote = antidote;
+    }
+    void sethp(int hp) {
+        this->hp = hp;
+    }
 };
 BaseKnight* BaseKnight::create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI) {
     BaseKnight* temp;
@@ -57,7 +162,7 @@ BaseKnight* BaseKnight::create(int id, int maxhp, int level, int gil, int antido
         temp = new NormalKnight;
     }
     temp->id = id;
-    temp->maxhp = maxhp;
+    temp->hp = maxhp;
     temp->level = level;
     temp->gil = gil;
     temp->antidote = antidote;
@@ -89,7 +194,10 @@ public:
 };
 class ArmyKnights {
 public:
-    static int knightid;
+    bool PaladinShield;
+    bool LancelotSpear;
+    bool GuinevereHair;
+    bool ExcaliburSword;
     ArmyKnights(const string& file_armyknights) {
         int quanlity;
         ifstream input(file_armyknights, ios::in);
@@ -123,7 +231,82 @@ class BaseItem {
 public:
     virtual bool canUse(BaseKnight* knight) = 0;
     virtual void use(BaseKnight* knight) = 0;
+    ItemType type;
 };
+class antidote : public BaseItem {
+public:
+    antidote() {
+        type = Antidote;
+    }
+    ~antidote();
+    bool canUse(BaseKnight* knight) {
+        if (knight->getpoison()) return true;
+        else return false;
+    }
+    void use(BaseKnight* knight) {
+        knight->setpoison(false);
+        knight->setantidote(knight->getantidote() - 1);
+    };
+};
+class phoenixdownI : public BaseItem {
+public:
+    phoenixdownI() {
+        type = PhoenixdownI;
+    }
+    ~phoenixdownI();
+    bool canUse(BaseKnight* knight) {
+        if (knight->gethp() <= 0) return true;
+        else return false;
+    }
+    void use(BaseKnight* knight) {
+        knight->sethp(knight->getmaxhp());
+    }
+};
+class phoenixdownII : public BaseItem {
+public:
+    phoenixdownII() {
+        type = PhoenixdownII;
+    }
+    ~phoenixdownII();
+    bool canUse(BaseKnight* knight) {
+        if (knight->gethp() < (knight->gethp()/4)) return true;
+        else return false;
+    }
+    void use(BaseKnight* knight) {
+        knight->sethp(knight->getmaxhp());
+    }
+};
+class phoenixdownIII : public BaseItem {
+public:
+    phoenixdownIII() {
+        type = PhoenixdownIII;
+    }
+    ~phoenixdownIII();
+    bool canUse(BaseKnight* knight) {
+        if (knight->gethp() < (knight->gethp() / 3)) return true;
+        else return false;
+    }
+    void use(BaseKnight* knight) {
+        if (knight->gethp() <= 0)  knight->sethp(knight->getmaxhp() / 3);
+        else knight->sethp(knight->gethp() + knight->getmaxhp() / 4);
+    }
+};
+class phoenixdownIV : public BaseItem {
+public:
+    phoenixdownIV() {
+        type = PhoenixdownIV;
+    }
+    ~phoenixdownIV();
+    bool canUse(BaseKnight* knight) {
+        if (knight->gethp() < (knight->gethp() / 2)) return true;
+        else return false;
+    }
+    void use(BaseKnight* knight) {
+        if (knight->gethp() <= 0)  knight->sethp(knight->getmaxhp() / 2);
+        else knight->sethp(knight->gethp() + knight->getmaxhp() / 5);
+    }
+};
+
 
 class Events {
 private:
@@ -147,7 +330,7 @@ int Events::count() const {
     return size;
 };
 int Events::get(int i) const {
-    return arr[size];
+    return arr[i];
 };
 
 class KnightAdventure {
