@@ -1,15 +1,45 @@
 ﻿  knight2.cpp
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(22,30): error C2061: syntax error: identifier 'BaseItem'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C2143: syntax error: missing ';' before '*'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C2433: 'BaseBag::BaseItem': 'virtual' not permitted on data declarations
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,45): error C2238: unexpected token(s) preceding ';'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(113,20): error C2061: syntax error: identifier 'Events'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,13): error C2143: syntax error: missing ';' before '*'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,19): error C2238: unexpected token(s) preceding ';'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(26,13): error C2061: syntax error: identifier 'BaseKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(27,5): error C2535: 'BaseBag::BaseBag(void)': member function already defined or declared
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(26,5): message : see declaration of 'BaseBag::BaseBag'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(28,30): error C2061: syntax error: identifier 'BaseItem'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C2433: 'BaseBag::BaseItem': 'virtual' not permitted on data declarations
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,45): error C2238: unexpected token(s) preceding ';'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(167,20): error C2061: syntax error: identifier 'PaladinKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(170,20): error C2061: syntax error: identifier 'LancelotKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(173,20): error C2061: syntax error: identifier 'DragonKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(176,20): error C2061: syntax error: identifier 'NormalKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(232,20): error C2061: syntax error: identifier 'Events'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(60,15): error C2511: 'bool BaseBag::insertFirst(BaseItem *)': overloaded member function not found in 'BaseBag'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,7): message : see declaration of 'BaseBag'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(63,10): error C2511: 'BaseBag::BaseBag(BaseKnight *,int,int)': overloaded member function not found in 'BaseBag'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,7): message : see declaration of 'BaseBag'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(66,9): error C2660: 'BaseBag::insertFirst': function does not take 1 arguments
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(28,18): message : see declaration of 'BaseBag::insertFirst'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(66,9): message : while trying to match the argument list '(phoenixdownI *)'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(70,9): error C2660: 'BaseBag::insertFirst': function does not take 1 arguments
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(28,18): message : see declaration of 'BaseBag::insertFirst'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(70,9): message : while trying to match the argument list '(antidote *)'
   main.cpp
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(22,30): error C2061: syntax error: identifier 'BaseItem'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C2143: syntax error: missing ';' before '*'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C2433: 'BaseBag::BaseItem': 'virtual' not permitted on data declarations
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,45): error C2238: unexpected token(s) preceding ';'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(113,20): error C2061: syntax error: identifier 'Events'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,13): error C2143: syntax error: missing ';' before '*'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,19): error C2238: unexpected token(s) preceding ';'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(26,13): error C2061: syntax error: identifier 'BaseKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(27,5): error C2535: 'BaseBag::BaseBag(void)': member function already defined or declared
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(26,5): message : see declaration of 'BaseBag::BaseBag'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(28,30): error C2061: syntax error: identifier 'BaseItem'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C2433: 'BaseBag::BaseItem': 'virtual' not permitted on data declarations
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,45): error C2238: unexpected token(s) preceding ';'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(167,20): error C2061: syntax error: identifier 'PaladinKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(170,20): error C2061: syntax error: identifier 'LancelotKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(173,20): error C2061: syntax error: identifier 'DragonKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(176,20): error C2061: syntax error: identifier 'NormalKnight'
+C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(232,20): error C2061: syntax error: identifier 'Events'
   Generating Code...
