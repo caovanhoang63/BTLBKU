@@ -1,5 +1,67 @@
 #include "knight2.h"
 /* * * BEGIN implementation of class BaseBag * * */
+
+
+void BaseBag::delete_head() {
+    if (bag == NULL)
+        return;
+    Node* p = bag;
+    bag = bag->pNext;
+    p->pNext = NULL;
+    delete p;
+}
+Node* createNode(BaseItem* item)
+{
+    Node* p = new Node;
+    if (p == NULL)
+        return NULL;
+    p->item = item;
+    p->pNext = NULL;
+    return p;
+}
+int BaseBag::countItem() {
+    int count = 0;
+    Node* p = bag;
+    while (p != NULL)
+    {
+        count++;
+        p = p->pNext;
+    }
+    return count;
+};
+bool BaseBag::insertFirst(BaseItem* item) {
+    if (countItem() == maxSize)
+        return 0;
+    Node* p = createNode(item);
+    if (p == NULL)
+        return 0;
+    p->pNext = bag;
+    bag = p;
+    return 1;
+};
+BaseItem* BaseBag::get(ItemType itemType) {
+    if (bag->item->type == itemType) {
+        BaseItem* temp = bag->item;
+        bag->item = NULL;
+        temp->use(this->knight);
+        delete_head();
+        return temp;
+    }
+    Node* p = bag;
+    while (p->pNext!= NULL && p->pNext->item->type != itemType)
+        p = p->pNext;
+    if (p->pNext == NULL)
+        return NULL;
+    Node* temp = p->pNext;
+    p->pNext = temp->pNext;
+    temp->pNext = bag;
+    bag = temp;
+    BaseItem* Item_temp = temp->item;
+    temp->item = NULL;
+    Item_temp->use(this->knight);
+    delete_head();
+    return Item_temp;
+}
 class DragonBag : public BaseBag
 {
 public:
@@ -10,7 +72,7 @@ public:
     bool insertFirst(BaseItem* item) {
         if (item->type == 0)
             return 0;
-        if (BaseBag::countItem() == maxSize)
+        if (countItem() == maxSize)
             return 0;
         Node* p = createNode(item);
         if (p == NULL)
@@ -130,17 +192,26 @@ void ArmyKnights::printInfo() const
          << endl
          << string(50, '-') << endl;
 }
-
 void ArmyKnights::printResult(bool win) const
 {
     cout << (win ? "WIN" : "LOSE") << endl;
 }
-
+BaseKnight* ArmyKnights::lastKnight() const {
+    return Army[quanlity - 1];
+}
+bool ArmyKnights::fight(BaseOpponent* opponent) {
+    for (int i = quanlity - 1; i <= 0; i++) {
+        if (Army[i]->knight_fight(opponent) == NULL)
+            return 1;
+    }
+    return 0;
+}
 /* * * END implementation of class ArmyKnights * * */
 
-/* * * BEGIN implementation of class KnightAdventure * * */
 KnightAdventure::KnightAdventure()
 {
     armyKnights = nullptr;
     events = nullptr;
 }
+
+/* * * BEGIN implementation of class KnightAdventure * * */
