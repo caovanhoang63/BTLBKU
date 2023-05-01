@@ -1,45 +1,82 @@
 ﻿  knight2.cpp
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,13): error C2143: syntax error: missing ';' before '*'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,19): error C2238: unexpected token(s) preceding ';'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(26,13): error C2061: syntax error: identifier 'BaseKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(27,5): error C2535: 'BaseBag::BaseBag(void)': member function already defined or declared
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(26,5): message : see declaration of 'BaseBag::BaseBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(28,30): error C2061: syntax error: identifier 'BaseItem'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C2143: syntax error: missing ';' before '*'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C2433: 'BaseBag::BaseItem': 'virtual' not permitted on data declarations
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,45): error C2238: unexpected token(s) preceding ';'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(167,20): error C2061: syntax error: identifier 'PaladinKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(170,20): error C2061: syntax error: identifier 'LancelotKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(173,20): error C2061: syntax error: identifier 'DragonKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(176,20): error C2061: syntax error: identifier 'NormalKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(232,20): error C2061: syntax error: identifier 'Events'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(60,15): error C2511: 'bool BaseBag::insertFirst(BaseItem *)': overloaded member function not found in 'BaseBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,7): message : see declaration of 'BaseBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(63,10): error C2511: 'BaseBag::BaseBag(BaseKnight *,int,int)': overloaded member function not found in 'BaseBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(23,7): message : see declaration of 'BaseBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(66,9): error C2660: 'BaseBag::insertFirst': function does not take 1 arguments
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(28,18): message : see declaration of 'BaseBag::insertFirst'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(66,9): message : while trying to match the argument list '(phoenixdownI *)'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(70,9): error C2660: 'BaseBag::insertFirst': function does not take 1 arguments
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(28,18): message : see declaration of 'BaseBag::insertFirst'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(70,9): message : while trying to match the argument list '(antidote *)'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(29,13): error C2143: syntax error: missing ';' before '*'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(29,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(29,19): error C2238: unexpected token(s) preceding ';'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(32,18): error C2065: 'BaseItem': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(32,28): error C2065: 'item': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(33,1): error C2143: syntax error: missing ';' before '{'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(35,5): error C2059: syntax error: 'if'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,6): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,8): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,5): error C2040: 'p': 'int' differs in levels of indirection from 'Node *'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,8): error C2146: syntax error: missing ';' before identifier 'item'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,6): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,8): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,5): error C2040: 'p': 'int' differs in levels of indirection from 'Node *'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,8): error C2146: syntax error: missing ';' before identifier 'pNext'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(39,5): error C2059: syntax error: 'return'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(40,1): error C2059: syntax error: '}'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(40,1): error C2143: syntax error: missing ';' before '}'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(42,1): error C2143: syntax error: missing ';' before '{'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(42,1): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(195,13): error C2143: syntax error: missing ';' before '*'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(195,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(195,17): error C2238: unexpected token(s) preceding ';'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(275,20): error C2061: syntax error: identifier 'Events'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(4,1): error C2504: 'BaseBag': base class undefined
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(7,9): error C2065: 'maxSize': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(8,9): error C2653: 'BaseBag': is not a class or namespace name
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(8,18): error C3861: 'createBag': identifier not found
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(13,13): error C2653: 'BaseBag': is not a class or namespace name
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(13,22): error C3861: 'countItem': identifier not found
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(13,37): error C2065: 'maxSize': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(15,19): error C2064: term does not evaluate to a function taking 1 arguments
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(18,20): error C2065: 'bag': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(19,9): error C2065: 'bag': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(24,1): error C2504: 'BaseBag': base class undefined
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(27,9): error C2065: 'maxSize': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(28,9): error C2653: 'BaseBag': is not a class or namespace name
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(28,18): error C3861: 'createBag': identifier not found
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(32,1): error C2504: 'BaseBag': base class undefined
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(34,9): error C2065: 'maxSize': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(35,9): error C2653: 'BaseBag': is not a class or namespace name
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(35,18): error C3861: 'createBag': identifier not found
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(40,1): error C2504: 'BaseBag': base class undefined
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(42,9): error C2065: 'maxSize': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(43,9): error C2653: 'BaseBag': is not a class or namespace name
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(43,18): error C3861: 'createBag': identifier not found
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(55,162): error C2065: 'bag': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(63,20): error C2061: syntax error: identifier 'PaladinKnight'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(67,20): error C2061: syntax error: identifier 'LancelotKnight'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(71,20): error C2061: syntax error: identifier 'DragonKnight'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(75,20): error C2061: syntax error: identifier 'NormalKnight'
   main.cpp
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,13): error C2143: syntax error: missing ';' before '*'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(20,19): error C2238: unexpected token(s) preceding ';'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(26,13): error C2061: syntax error: identifier 'BaseKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(27,5): error C2535: 'BaseBag::BaseBag(void)': member function already defined or declared
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(26,5): message : see declaration of 'BaseBag::BaseBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(28,30): error C2061: syntax error: identifier 'BaseItem'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C2143: syntax error: missing ';' before '*'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C2433: 'BaseBag::BaseItem': 'virtual' not permitted on data declarations
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(29,45): error C2238: unexpected token(s) preceding ';'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(167,20): error C2061: syntax error: identifier 'PaladinKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(170,20): error C2061: syntax error: identifier 'LancelotKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(173,20): error C2061: syntax error: identifier 'DragonKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(176,20): error C2061: syntax error: identifier 'NormalKnight'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(232,20): error C2061: syntax error: identifier 'Events'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(29,13): error C2143: syntax error: missing ';' before '*'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(29,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(29,19): error C2238: unexpected token(s) preceding ';'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(32,18): error C2065: 'BaseItem': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(32,28): error C2065: 'item': undeclared identifier
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(33,1): error C2143: syntax error: missing ';' before '{'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(35,5): error C2059: syntax error: 'if'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,6): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,8): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,5): error C2040: 'p': 'int' differs in levels of indirection from 'Node *'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(37,8): error C2146: syntax error: missing ';' before identifier 'item'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,6): error C3927: '->': trailing return type is not allowed after a non-function declarator
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,8): error C3613: missing return type after '->' ('int' assumed)
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,5): error C2040: 'p': 'int' differs in levels of indirection from 'Node *'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(38,8): error C2146: syntax error: missing ';' before identifier 'pNext'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(39,5): error C2059: syntax error: 'return'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(40,1): error C2059: syntax error: '}'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(40,1): error C2143: syntax error: missing ';' before '}'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(42,1): error C2143: syntax error: missing ';' before '{'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(42,1): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(195,13): error C2143: syntax error: missing ';' before '*'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(195,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(195,17): error C2238: unexpected token(s) preceding ';'
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.h(275,20): error C2061: syntax error: identifier 'Events'
   Generating Code...
