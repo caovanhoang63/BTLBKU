@@ -29,21 +29,15 @@ struct Node
     BaseItem* item;
     struct Node* pNext;
 };
-Node* createNode(BaseItem* item)
-{
-    Node* p = new Node;
-    if (p == NULL)
-        return NULL;
-    p->item = item;
-    p->pNext = NULL;
-    return p;
-}
+
 class BaseBag
 {
 protected:
     int maxSize;
     BaseKnight* knight;
+    Node* bag;
 public:
+    void delete_head();
     void createBag(BaseKnight* knight, int a, int b) {
         this->knight = knight;
         for (int i = 0; i <= a; i++)
@@ -60,29 +54,10 @@ public:
             }
         }
     };
-    Node* bag;
-    virtual bool insertFirst(BaseItem* item) {
-        if (countItem() == maxSize)
-            return 0;
-        Node* p = createNode(item);
-        if (p == NULL)
-            return 0;
-        p->pNext = bag;
-        bag = p;
-        return 1;
-    };
+    virtual bool insertFirst(BaseItem* item);
     virtual BaseItem *get(ItemType itemType);
     virtual string toString() const;
-    int countItem() {
-        int count = 0;
-        Node* p = bag;
-        while (p != NULL)
-        {
-            count++;
-            p = p->pNext;
-        }
-        return count;
-    };
+    int countItem();
     void init()
     {
         bag = NULL;
@@ -95,7 +70,6 @@ protected:
     int baseDamage;
     int levelO;
     int eventid;
-
 public:
     int setlevelO(int i) {
         this->levelO = (i + eventid) % 10 + 1;
@@ -162,6 +136,8 @@ public:
 };
 class Tornbery : public BaseOpponent
 {
+public:
+    void effect(BaseKnight* knight);
     Tornbery() {
         this->eventid = 6;
     }
@@ -169,6 +145,8 @@ class Tornbery : public BaseOpponent
 };
 class QueenofCards : public BaseOpponent
 {
+public:
+    void effect(BaseKnight* knight);
     QueenofCards() {
         this->eventid = 7;
     }
@@ -177,11 +155,10 @@ class QueenofCards : public BaseOpponent
 
 enum KnightType
 {
-    PALADIN = 0,
-    LANCELOT,
-    DRAGON,
-    NORMAL
+    PALADIN = 0,LANCELOT,DRAGON,NORMAL
 };
+
+
 class BaseKnight
 {
 protected:
@@ -201,6 +178,7 @@ public:
         this->poison = false;
     }
     ~BaseKnight();
+    virtual BaseOpponent* knight_fight(BaseOpponent* opponent);
     static BaseKnight *create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI);
     string toString() const;
     int const getmaxhp()
@@ -252,9 +230,9 @@ public:
     bool LancelotSpear;
     bool GuinevereHair;
     bool ExcaliburSword;
+    int quanlity;
     ArmyKnights(const string &file_armyknights)
     {
-        int quanlity;
         ifstream input(file_armyknights, ios::in);
         if (input.fail())
         {
