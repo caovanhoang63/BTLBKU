@@ -1,4 +1,4 @@
-#include "knight2.h"
+﻿#include "knight2.h"
 /* * * BEGIN implementation of class BaseBag * * */
 
 
@@ -106,6 +106,30 @@ class LancelotBag : public BaseBag
     };
 };
 /* * * END implementation of class BaseBag * * */
+void BaseOpponent::Win_effect(BaseKnight* knight) {
+    knight->setlevel(knight->getlevel() + 1);
+    knight->setgil(knight->getgil() + this->gil);
+}
+void BaseOpponent::Lose_effect(BaseKnight* knight) {
+    knight->sethp(knight->gethp() - this->baseDamage * (this->levelO - knight->getlevel()));
+}
+void Tornbery::Win_effect(BaseKnight* knight) {
+    knight->setlevel(knight->getlevel() + 1);
+}
+void Tornbery::Lose_effect(BaseKnight* knight) {
+
+}
+void QueenofCards::Win_effect(BaseKnight* knight) {
+    knight->setlevel(10);
+    knight->setgil(999);
+}
+void QueenofCards::Lose_effect(BaseKnight* knight) {
+    knight->setgil(knight->getgil() / 2);
+}
+void DurianGarden::effect(BaseKnight* knight) {
+    knight->sethp(knight->getmaxhp());
+}
+
 
 /* * * BEGIN implementation of class BaseKnight * * */
 string BaseKnight::toString() const
@@ -175,6 +199,105 @@ public:
         this->knightType = NORMAL;
     }
 };
+bool BaseKnight::knight_fight(BaseOpponent* opponent) {
+    switch (opponent->Otype)
+    {
+        case 1:
+            if (this->getlevel() >= opponent->levelO) {
+                return true;
+                break;
+            }
+            else {
+                return false;
+                break;
+        }
+        case 2:
+            if (this->getlevel() >= opponent->levelO) {
+                return true;
+                break;
+            }
+            else {
+                return false;
+                break;
+            }
+        case 3:
+            if (this->getlevel() >= opponent->levelO) {
+                return true;
+                break;
+            }
+            else {
+                return false;
+                break;
+            }
+        case 4:
+            if (this->getlevel() >= opponent->levelO) {
+                return true;
+                break;
+            }
+            else {
+                return false;
+                break;
+            }
+        case 5:
+            if (this->getlevel() >= opponent->levelO) {
+                return true;
+                break;
+            }
+            else {
+                return false;
+                break;
+            }
+        case 6:
+            if (this->getlevel() >= opponent->levelO) {
+                this->setlevel(this->getlevel() + 1);
+                return true;
+                break;
+            }
+            else {
+                this->setpoison(true);
+                if (this->getantidote() >= 1) {
+                    this->setantidote(this->getantidote() - 1);
+                    break;
+                }
+                else{
+                    /* GỌI HÀM RỚT 3 MÓN ĐỒ
+                    CẬP NHẬP LẠI MÁU
+                    CẬP NHẬP LẠI TÚI ĐỒ
+                    */
+            }
+            }
+        case 7:
+        case 8:
+            if (this->getgil() < 50) break;
+            else if (this->gethp() < this->getmaxhp() / 3 && this->getgil() >= 50) {
+                this->setgil(this->getgil() - 50);
+                this->sethp(this->gethp() + this->getmaxhp() / 5);
+                break;
+            }
+        case 9:
+            this->sethp(this->getmaxhp());
+            break;
+        case 10:
+            if ((this->getlevel() == 10 && this->gethp() == this->getmaxhp()) || this->knightType == DRAGON) {
+                this->setgil(999);
+                this->setlevel(9);
+                return true;
+                break;
+            }
+            else {
+                return false;
+                break;
+            }
+        case 11:
+            if (this->getlevel() == 10 || (this->getType() == PALADIN && this->getlevel() > 8)) {
+
+                return true;
+
+            }
+
+
+    }
+}
 /* * * END implementation of class BaseKnight * * */
 /* * * BEGIN implementation of class ArmyKnights * * */
 void ArmyKnights::printInfo() const
@@ -205,6 +328,18 @@ bool ArmyKnights::fight(BaseOpponent* opponent) {
             return 1;
     }
     return 0;
+}
+bool ArmyKnights::hasPaladinShield() const {
+    return this->PaladinShield;
+}
+bool ArmyKnights::hasLancelotSpear() const {
+    return this->LancelotSpear;
+}
+bool ArmyKnights::hasGuinevereHair() const {
+    return this->GuinevereHair;
+}
+bool ArmyKnights::hasExcaliburSword() const {
+    return this->ExcaliburSword;
 }
 /* * * END implementation of class ArmyKnights * * */
 

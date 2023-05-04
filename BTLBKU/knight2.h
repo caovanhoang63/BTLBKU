@@ -63,14 +63,29 @@ public:
         bag = NULL;
     }
 };
+enum OpponentType {
+    MadBeartype=1,
+    Bandittype,
+    LordLupintype,
+    Elftype,
+    Trolltype,
+    Tornberytype,
+    QueenofCardstype,
+    NinaDeRingstype,
+    DurianGardentype,
+    OmegaWeapontype,
+    Hadestype,
+};
 class BaseOpponent
 {
-protected:
+public:
     int gil;
     int baseDamage;
     int levelO;
     int eventid;
-public:
+    OpponentType Otype;
+    virtual void Win_effect(BaseKnight* knight);
+    virtual void Lose_effect(BaseKnight* knight);
     int setlevelO(int i) {
         this->levelO = (i + eventid) % 10 + 1;
         return this->levelO;
@@ -84,6 +99,7 @@ public:
         this->baseDamage = 10;
         this->gil = 100;
         this->eventid = 1;
+        this->Otype = MadBeartype;
     }
     ~MadBear();
 };
@@ -95,6 +111,7 @@ public:
         this->baseDamage = 15;
         this->gil = 150;
         this->eventid = 2;
+        this->Otype = Bandittype;
     }
     ~Bandit();
 
@@ -107,6 +124,7 @@ public:
         this->baseDamage = 45;
         this->gil = 450;
         this->eventid = 3;
+        this->Otype = LordLupintype;
     }
     ~LordLupin();
 
@@ -119,6 +137,7 @@ public:
         this->baseDamage = 75;
         this->gil = 750;
         this->eventid = 4;
+        this->Otype = Elftype;
     }
     ~Elf();
 };
@@ -130,6 +149,7 @@ public:
         this->baseDamage = 95;
         this->gil = 800;
         this->eventid = 5;
+        this->Otype = Trolltype;
     }
     ~Troll();
 
@@ -137,20 +157,49 @@ public:
 class Tornbery : public BaseOpponent
 {
 public:
-    void effect(BaseKnight* knight);
+    void Win_effect(BaseKnight* knight);
+    void Lose_effect(BaseKnight* knight);
     Tornbery() {
         this->eventid = 6;
+        this->Otype = Tornberytype;
     }
     ~Tornbery();
 };
 class QueenofCards : public BaseOpponent
 {
 public:
-    void effect(BaseKnight* knight);
+    void Win_effect(BaseKnight* knight);
+    void Lose_effect(BaseKnight* knight);
     QueenofCards() {
         this->eventid = 7;
+        this->Otype = QueenofCardstype;
     }
     ~QueenofCards();
+};
+class NinaDeRings : public BaseOpponent {
+public:
+    NinaDeRings() {
+        this->eventid = 8;
+        this->Otype = NinaDeRingstype;
+    }
+};
+class DurianGarden :public BaseOpponent
+{
+public:
+    void effect(BaseKnight* knight);
+    DurianGarden() {
+        this->eventid = 9;
+        this->Otype = DurianGardentype;
+    }
+    ~DurianGarden();
+};
+class OmegaWeapon :public BaseOpponent
+{
+public:
+    OmegaWeapon() {
+        this->eventid = 10;
+        this->Otype = OmegaWeapontype;
+    }
 };
 
 enum KnightType
@@ -178,7 +227,7 @@ public:
         this->poison = false;
     }
     ~BaseKnight();
-    virtual BaseOpponent* knight_fight(BaseOpponent* opponent);
+    virtual bool knight_fight(BaseOpponent* opponent);
     static BaseKnight *create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI);
     string toString() const;
     int const getmaxhp()
@@ -213,6 +262,9 @@ public:
     {
         this->poison = poison;
     }
+    void setgil(int gil) {
+        this->gil = gil;
+    }
     void setantidote(int antidote)
     {
         this->antidote = antidote;
@@ -220,6 +272,11 @@ public:
     void sethp(int hp)
     {
         this->hp = hp;
+    }
+    void setlevel(int level) {
+        if (level >= 0 && level < 10) {
+            this->level = level;
+        }
     }
 };
 
@@ -231,8 +288,14 @@ public:
     bool GuinevereHair;
     bool ExcaliburSword;
     int quanlity;
+    bool defeatOmega;
+    bool defeatHades;
     ArmyKnights(const string &file_armyknights)
     {
+        this->PaladinShield = false;
+        this->LancelotSpear = false;
+        this->GuinevereHair = false;
+        this->ExcaliburSword = false;
         ifstream input(file_armyknights, ios::in);
         if (input.fail())
         {
@@ -253,14 +316,24 @@ public:
     bool adventure(Events *events);
     int count() const;
     BaseKnight *lastKnight() const;
-
     bool hasPaladinShield() const;
     bool hasLancelotSpear() const;
     bool hasGuinevereHair() const;
     bool hasExcaliburSword() const;
-
     void printInfo() const;
     void printResult(bool win) const;
+    bool getdefeatOmega() {
+        return this->defeatOmega;
+    }
+    void setdefeatOmega(bool defatOmega) {
+        this->defeatOmega = defeatOmega;
+    }
+    bool getdefeatHades() {
+        return this->defeatHades;
+    }
+    void setdefeatHades(bool defeatHades) {
+        this->defeatHades = defeatHades;
+    }
 };
 class BaseItem
 {
