@@ -5,6 +5,12 @@
 #include "main.h"
 
 #define DEBUG
+class BaseKnight;
+class BaseItem;
+class ArmyKnights;
+class BaseBag;
+class Events;
+class KnightAdventure;
 enum ItemType
 {
     Antidote = 0,
@@ -206,7 +212,7 @@ protected:
     bool poison;
     BaseBag* bag;
     KnightType knightType;
-    float base_dmg;
+    double base_dmg;
 public:
     BaseKnight()
     {
@@ -241,7 +247,7 @@ public:
     {
         return this->antidote;
     }
-    int const get_base_dmg() {
+    double const get_base_dmg() {
         return this->base_dmg;
     }
     bool const getpoison()

@@ -92,7 +92,7 @@ BaseItem* BaseBag::get(ItemType itemType) {
 	return Item_temp;
 }
 string  BaseBag::toString() const {
-	cout << "Bag[count = <<" << ">; <list_items>]";
+	return "Bag[count = <<>>; <list_items>]";
 }
 class DragonBag : public BaseBag
 {
@@ -768,9 +768,6 @@ KnightAdventure::KnightAdventure()
 }
 
 /* * * BEGIN implementation of class KnightAdventure * * */\
-KnightAdventure::KnightAdventure() {
-	return;
-}
 void KnightAdventure::loadArmyKnights(const string& inputarmy) {
 	armyKnights = new ArmyKnights(inputarmy);
 }
