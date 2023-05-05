@@ -11,9 +11,28 @@
 //	knight->setantidote(knight->getantidote() - 1);
 //};
 
+bool isPrime(int x)
+{
+	if (x <= 1)
+		return 0;
+	for (int i = 2; i * i <= x; i++)
+		if (x % i == 0)
+			return 0;
+	return 1;
+}
 /* * * END implementation of class BaseItem * * */
 
 /* * * BEGIN implementation of class BaseBag * * */
+BaseBag::BaseBag(){
+	init();
+}
+void BaseBag::init()
+{
+	bag = NULL;
+}
+Node* BaseBag::getBag()const {
+	return bag;
+}
 void BaseBag::createBag(BaseKnight* knight, int a, int b) {
 	this->knight = knight;
 	for (int i = 0; i <= a; i++)
@@ -127,7 +146,6 @@ class NormalBag : public BaseBag
 	NormalBag(BaseKnight* knight, int a, int b) {
 		maxSize = 19;
 		BaseBag::createBag(knight, a, b);
-
 	};
 };
 class LancelotBag : public BaseBag
@@ -219,7 +237,7 @@ string BaseKnight::toString() const
 BaseKnight* BaseKnight::create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI)
 {
 	BaseKnight* temp;
-	if (isPrime(temp->maxhp))
+	if (isPrime(maxhp))
 	{
 		temp = new PaladinKnight;
 	}
@@ -655,7 +673,7 @@ bool ArmyKnights::adventure(Events* events) {
 	for (int i = 0; i < events->count(); i++) {
 		if (events->get(i) <= 11)
 		{
-			BaseOpponent* temp;
+			BaseOpponent* temp = NULL;
 			switch (events->get(i))
 			{
 			case 1:
@@ -802,3 +820,26 @@ bool Ultimecia::fight(ArmyKnights* ArmyKnight) {
 
 /* * * END implementation of class Ultimecia * * */
 
+
+
+Events::~Events() {
+	delete[] arr;
+}
+Events::Events(string s)
+{
+	ifstream input(s, ios::in);
+	input >> size;
+	arr = new int[size + 1];
+	for (int i = 0; i < size; i++)
+	{
+		input >> *(arr + i);
+	}
+};
+int Events::count() const
+{
+	return size;
+};
+int Events::get(int i) const
+{
+	return arr[i];
+};
