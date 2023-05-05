@@ -84,7 +84,7 @@ public:
     int levelO;
     int eventid;
     OpponentType Otype;
-    virtual void Win_effect(BaseKnight* knight);
+    virtual void Win_effect(ArmyKnights* ArmyKnight);
     virtual void Lose_effect(BaseKnight* knight);
     int setlevelO(int i) {
         this->levelO = (i + eventid) % 10 + 1;
@@ -157,7 +157,7 @@ public:
 class Tornbery : public BaseOpponent
 {
 public:
-    void Win_effect(BaseKnight* knight);
+    void Win_effect(ArmyKnights* ArmyKnight);
     void Lose_effect(BaseKnight* knight);
     Tornbery() {
         this->eventid = 6;
@@ -165,16 +165,16 @@ public:
     }
     ~Tornbery();
 };
-class QueenofCards : public BaseOpponent
+class QueenOfCards : public BaseOpponent
 {
 public:
-    void Win_effect(BaseKnight* knight);
+    void Win_effect(ArmyKnights* ArmyKnight);
     void Lose_effect(BaseKnight* knight);
-    QueenofCards() {
+    QueenOfCards() {
         this->eventid = 7;
         this->Otype = QueenofCardstype;
     }
-    ~QueenofCards();
+    ~QueenOfCards();
 };
 class NinaDeRings : public BaseOpponent {
 public:
@@ -182,11 +182,16 @@ public:
         this->eventid = 8;
         this->Otype = NinaDeRingstype;
     }
+    void Win_effect(ArmyKnights* ArmyKnight);
+    void Lose_effect(BaseKnight* knight);
+    void Effect(BaseKnight* knight);
 };
 class DurianGarden :public BaseOpponent
 {
 public:
-    void effect(BaseKnight* knight);
+    void Win_effect(ArmyKnights* ArmyKnight);
+    void Lose_effect(BaseKnight* knight);
+    void Effect(BaseKnight* knight);
     DurianGarden() {
         this->eventid = 9;
         this->Otype = DurianGardentype;
@@ -200,8 +205,18 @@ public:
         this->eventid = 10;
         this->Otype = OmegaWeapontype;
     }
+    void Win_effect(ArmyKnights* ArmyKnight);
+    void Lose_effect(BaseKnight* knight);
 };
-
+class Hades : public BaseOpponent {
+public:
+    Hades() {
+        this->eventid = 11;
+        this->Otype = Hadestype;
+    }
+    void Win_effect(ArmyKnights* ArmyKnight);
+    void Lose_effect(BaseKnight* knight);
+};
 enum KnightType
 {
     PALADIN = 0,LANCELOT,DRAGON,NORMAL
@@ -220,16 +235,21 @@ protected:
     bool poison;
     BaseBag* bag;
     KnightType knightType;
-
+    float base_dmg;
 public:
     BaseKnight()
     {
         this->poison = false;
     }
     ~BaseKnight();
+    void levelup();
+    float damage();
     virtual bool knight_fight(BaseOpponent* opponent);
     static BaseKnight *create(int id, int maxhp, int level, int gil, int antidote, int phoenixdownI);
     string toString() const;
+    void DropItem() {
+        bag->delete_head();
+    }
     int const getmaxhp()
     {
         return this->maxhp;
@@ -249,6 +269,9 @@ public:
     int const getantidote()
     {
         return this->antidote;
+    }
+    int const get_base_dmg() {
+        return this->base_dmg;
     }
     bool const getpoison()
     {
@@ -278,8 +301,46 @@ public:
             this->level = level;
         }
     }
-};
 
+};
+class LancelotKnight : public BaseKnight
+{
+public:
+    bool knight_fight(BaseOpponent* opponent);
+    LancelotKnight()
+    {
+        this->knightType = LANCELOT;
+        this->base_dmg = 0.05;
+    }
+};
+class DragonKnight : public BaseKnight
+{
+public:
+    bool knight_fight(BaseOpponent* opponent);
+    DragonKnight()
+    {
+        this->base_dmg = 0.075;
+        this->knightType = DRAGON;
+    }
+};
+class PaladinKnight : public BaseKnight
+{
+public:
+    bool knight_fight(BaseOpponent* opponent);
+    PaladinKnight()
+    {
+        this->base_dmg = 0.06;
+        this->knightType = PALADIN;
+    }
+};
+class NormalKnight : public BaseKnight
+{
+public:
+    NormalKnight()
+    {
+        this->knightType = NORMAL;
+    }
+};
 class ArmyKnights
 {
 public:
@@ -334,6 +395,9 @@ public:
     void setdefeatHades(bool defeatHades) {
         this->defeatHades = defeatHades;
     }
+    void TakeGil(int gil);
+    void TakeItem(BaseItem* Item);
+    void UseItem(BaseKnight* knight);
 };
 class BaseItem
 {
@@ -349,7 +413,6 @@ public:
     {
         type = Antidote;
     }
-    ~antidote();
     bool canUse(BaseKnight* knight)
     {
         if (knight->getpoison())
@@ -370,7 +433,6 @@ public:
     {
         type = PhoenixdownI;
     }
-    ~phoenixdownI();
     bool canUse(BaseKnight* knight)
     {
         if (knight->gethp() <= 0)
@@ -390,7 +452,6 @@ public:
     {
         type = PhoenixdownII;
     }
-    ~phoenixdownII();
     bool canUse(BaseKnight* knight)
     {
         if (knight->gethp() < (knight->gethp() / 4))
@@ -410,7 +471,6 @@ public:
     {
         type = PhoenixdownIII;
     }
-    ~phoenixdownIII();
     bool canUse(BaseKnight* knight)
     {
         if (knight->gethp() < (knight->gethp() / 3))
@@ -433,7 +493,6 @@ public:
     {
         type = PhoenixdownIV;
     }
-    ~phoenixdownIV();
     bool canUse(BaseKnight* knight)
     {
         if (knight->gethp() < (knight->gethp() / 2))
@@ -461,6 +520,9 @@ public:
     int get(int i) const;
     ~Events();
 };
+Events::~Events() {
+    delete[] arr;
+}
 Events::Events(string s)
 {
     ifstream input(s, ios::in);
@@ -479,7 +541,6 @@ int Events::get(int i) const
 {
     return arr[i];
 };
-
 class KnightAdventure
 {
 private:
@@ -489,9 +550,16 @@ private:
 public:
     KnightAdventure();
     ~KnightAdventure(); // TODO:
-
     void loadArmyKnights(const string &inputarmy);
     void loadEvents(const string &inputevent);
     void run();
+};
+class Ultimecia {
+private:
+    float hp;
+public:
+    Ultimecia();
+    // 1 win -  0 lose
+    bool fight(ArmyKnights*& ArmyKnight);
 };
 #endif // __KNIGHT2_H__
