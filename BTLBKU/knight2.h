@@ -4,18 +4,13 @@
 
 #include "main.h"
 
-// #define DEBUG
-
-// Kiem tra nguyen to
-bool isPrime(int x)
-{
-    if (x <= 1)
-        return 0;
-    for (int i = 2; i * i <= x; i++)
-        if (x % i == 0)
-            return 0;
-    return 1;
-}
+#define DEBUG
+class BaseKnight;
+class BaseItem;
+class ArmyKnights;
+class BaseBag;
+class Events;
+class KnightAdventure;
 enum ItemType
 {
     Antidote = 0,
@@ -24,6 +19,8 @@ enum ItemType
     PhoenixdownIII,
     PhoenixdownIV
 };
+
+
 struct Node
 {
     BaseItem* item;
@@ -38,22 +35,7 @@ protected:
     Node* bag;
 public:
     void delete_head();
-    void createBag(BaseKnight* knight, int a, int b) {
-        this->knight = knight;
-        for (int i = 0; i <= a; i++)
-        {
-            phoenixdownI* temp = new phoenixdownI;
-            insertFirst(temp);
-        }
-        if (knight->getType() != 2)
-        {
-            for (int i = 0; i <= b; i++)
-            {
-                antidote* temp = new antidote;
-                insertFirst(temp);
-            }
-        }
-    };
+    void createBag(BaseKnight* knight, int a, int b);
     virtual bool insertFirst(BaseItem* item);
     virtual BaseItem *get(ItemType itemType);
     virtual string toString() const;
@@ -61,6 +43,9 @@ public:
     void init()
     {
         bag = NULL;
+    }
+    Node* getBag ()const {
+        return bag;
     }
 };
 enum OpponentType {
@@ -101,7 +86,6 @@ public:
         this->eventid = 1;
         this->Otype = MadBeartype;
     }
-    ~MadBear();
 };
 class Bandit : public BaseOpponent
 {
@@ -113,7 +97,6 @@ public:
         this->eventid = 2;
         this->Otype = Bandittype;
     }
-    ~Bandit();
 
 };
 class LordLupin : public BaseOpponent
@@ -126,7 +109,6 @@ public:
         this->eventid = 3;
         this->Otype = LordLupintype;
     }
-    ~LordLupin();
 
 };
 class Elf : public BaseOpponent
@@ -139,7 +121,6 @@ public:
         this->eventid = 4;
         this->Otype = Elftype;
     }
-    ~Elf();
 };
 class Troll : public BaseOpponent
 {
@@ -151,7 +132,6 @@ public:
         this->eventid = 5;
         this->Otype = Trolltype;
     }
-    ~Troll();
 
 };
 class Tornbery : public BaseOpponent
@@ -163,7 +143,6 @@ public:
         this->eventid = 6;
         this->Otype = Tornberytype;
     }
-    ~Tornbery();
 };
 class QueenOfCards : public BaseOpponent
 {
@@ -174,7 +153,6 @@ public:
         this->eventid = 7;
         this->Otype = QueenofCardstype;
     }
-    ~QueenOfCards();
 };
 class NinaDeRings : public BaseOpponent {
 public:
@@ -196,7 +174,6 @@ public:
         this->eventid = 9;
         this->Otype = DurianGardentype;
     }
-    ~DurianGarden();
 };
 class OmegaWeapon :public BaseOpponent
 {
@@ -235,7 +212,7 @@ protected:
     bool poison;
     BaseBag* bag;
     KnightType knightType;
-    float base_dmg;
+    double base_dmg;
 public:
     BaseKnight()
     {
@@ -270,12 +247,15 @@ public:
     {
         return this->antidote;
     }
-    int const get_base_dmg() {
+    double const get_base_dmg() {
         return this->base_dmg;
     }
     bool const getpoison()
     {
         return this->poison;
+    }
+    BaseBag* const getBag() {
+        return bag;
     }
     KnightType const getType()
     {
@@ -398,14 +378,25 @@ public:
     void TakeGil(int gil);
     void TakeItem(BaseItem* Item);
     void UseItem(BaseKnight* knight);
+    void Reborn(BaseKnight* knight);
 };
 class BaseItem
 {
 public:
-    virtual bool canUse(BaseKnight *knight) = 0;
-    virtual void use(BaseKnight *knight) = 0;
+    bool virtual canUse(BaseKnight* knight) = 0;
+    void virtual use(BaseKnight* knight) = 0;
     ItemType type;
 };
+// Kiem tra nguyen to
+bool isPrime(int x)
+{
+    if (x <= 1)
+        return 0;
+    for (int i = 2; i * i <= x; i++)
+        if (x % i == 0)
+            return 0;
+    return 1;
+}
 class antidote : public BaseItem
 {
 public:
@@ -417,14 +408,13 @@ public:
     {
         if (knight->getpoison())
             return true;
-        else
-            return false;
+        return false;
     }
-    void use(BaseKnight* knight)
+    void use(BaseKnight* knight) 
     {
         knight->setpoison(false);
         knight->setantidote(knight->getantidote() - 1);
-    };
+    }
 };
 class phoenixdownI : public BaseItem
 {
@@ -560,6 +550,6 @@ private:
 public:
     Ultimecia();
     // 1 win -  0 lose
-    bool fight(ArmyKnights*& ArmyKnight);
+     bool fight(ArmyKnights* ArmyKnight);
 };
 #endif // __KNIGHT2_H__
