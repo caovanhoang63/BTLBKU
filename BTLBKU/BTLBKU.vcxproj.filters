@@ -34,5 +34,11 @@
     <None Include="..\..\..\A2_initial-1\tc1_armyknights">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="tc1_armyknights">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tc1_events">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,12 +1,11 @@
 ﻿  knight2.cpp
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(291,19): error C2061: syntax error: identifier 'LancelotBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(302,19): error C2061: syntax error: identifier 'DragonBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(313,19): error C2061: syntax error: identifier 'PaladinBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(321,19): error C2061: syntax error: identifier 'NormalBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.cpp(364,20): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(350,20): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   main.cpp
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(291,19): error C2061: syntax error: identifier 'LancelotBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(302,19): error C2061: syntax error: identifier 'DragonBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(313,19): error C2061: syntax error: identifier 'PaladinBag'
-C:\Users\Hoang\Desktop\BTLBKU\BTLBKU\BTLBKU\knight2.h(321,19): error C2061: syntax error: identifier 'NormalBag'
   Generating Code...
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(348): warning C4715: 'BaseKnight::knight_fight': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(427): warning C4715: 'LancelotKnight::knight_fight': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(524): warning C4715: 'DragonKnight::knight_fight': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(591): warning C4715: 'PaladinKnight::knight_fight': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(667): warning C4715: 'ArmyKnights::Reborn': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(793): warning C4715: 'ArmyKnights::adventure': not all control paths return a value
+  BTLBKU.vcxproj -> C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\x64\Debug\BTLBKU.exe

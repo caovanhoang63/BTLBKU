@@ -44,6 +44,25 @@ public:
     void init();
     Node* getBag()const;
 };
+class DragonBag : public BaseBag {
+public:
+    DragonBag(BaseKnight* knight, int a, int b);
+    bool insertFirst(BaseItem* item);
+};
+class PaladinBag : public BaseBag
+{
+public:
+    PaladinBag(BaseKnight* knight, int a, int b);
+};
+class NormalBag : public BaseBag
+{
+public:
+    NormalBag(BaseKnight* knight, int a, int b);
+};
+class LancelotBag: public BaseBag{
+public:
+    LancelotBag(BaseKnight* knight, int a, int b);
+};
 enum OpponentType {
     MadBeartype=1,
     Bandittype,
@@ -105,7 +124,7 @@ public:
         this->eventid = 3;
         this->Otype = LordLupintype;
     }
-
+    ~LordLupin();
 };
 class Elf : public BaseOpponent
 {
@@ -284,43 +303,24 @@ class LancelotKnight : public BaseKnight
 {
 public:
     bool knight_fight(BaseOpponent* opponent);
-    LancelotKnight()
-    {
-        this->knightType = LANCELOT;
-        this->base_dmg = 0.05;
-        bag = new LancelotBag(this, phoenixI, antidote);
-    }
+    LancelotKnight();
 };
 class DragonKnight : public BaseKnight
 {
 public:
     bool knight_fight(BaseOpponent* opponent);
-    DragonKnight()
-    {
-        this->base_dmg = 0.075;
-        this->knightType = DRAGON;
-        bag = new DragonBag(this, phoenixI, antidote);
-    }
+    DragonKnight();
 };
 class PaladinKnight : public BaseKnight
 {
 public:
     bool knight_fight(BaseOpponent* opponent);
-    PaladinKnight()
-    {
-        this->base_dmg = 0.06;
-        this->knightType = PALADIN;
-        bag = new PaladinBag(this, phoenixI, antidote);
-    }
+    PaladinKnight();
 };
 class NormalKnight : public BaseKnight
 {
 public:
-    NormalKnight()
-    {
-        bag = new NormalBag(this, phoenixI, antidote);
-        this->knightType = NORMAL;
-    }
+    NormalKnight();
 };
 class ArmyKnights
 {
@@ -347,7 +347,7 @@ public:
         input >> quanlity;
         Army = new BaseKnight*[quanlity];
         int id, maxhp, level, gil, antidote, phoenixdownI;
-        input >> id >> maxhp >> level >> phoenixdownI >> gil >> antidote;
+        input >> maxhp >> level >> phoenixdownI >> gil >> antidote;
         for (id = 1; id <= quanlity; id++)
         {
             BaseKnight* temp = BaseKnight::create(id, maxhp, level, gil, antidote, phoenixdownI);
@@ -381,7 +381,7 @@ public:
     void TakeGil(int gil);
     void TakeItem(BaseItem* Item);
     void UseItem(BaseKnight* knight);
-    void Reborn(BaseKnight* knight);
+    bool Reborn(BaseKnight* knight);
 };
 class BaseItem
 {

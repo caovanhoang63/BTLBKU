@@ -113,14 +113,11 @@ BaseItem* BaseBag::get(ItemType itemType) {
 string  BaseBag::toString() const {
 	return "Bag[count = <<>>; <list_items>]";
 }
-class DragonBag : public BaseBag
-{
-public:
-	DragonBag(BaseKnight* knight, int a, int b) {
+DragonBag::DragonBag(BaseKnight* knight, int a, int b) {
 		maxSize = 14;
 		BaseBag::createBag(knight, a, 0);
 	};
-	bool insertFirst(BaseItem* item) {
+	bool DragonBag::insertFirst(BaseItem* item) {
 		if (item->type == 0)
 			return 0;
 		if (countItem() == maxSize)
@@ -132,28 +129,17 @@ public:
 		bag = p;
 		return 1;
 	};
-};
-class PaladinBag : public BaseBag
-{
-public:
-	PaladinBag(BaseKnight* knight, int a, int b) {
+PaladinBag::PaladinBag(BaseKnight* knight, int a, int b){
 		maxSize = INT_MAX;
 		BaseBag::createBag(knight, a, b);
 	};
-};
-class NormalBag : public BaseBag
-{
-	NormalBag(BaseKnight* knight, int a, int b) {
-		maxSize = 19;
-		BaseBag::createBag(knight, a, b);
-	};
-};
-class LancelotBag : public BaseBag
-{
-	LancelotBag(BaseKnight* knight, int a, int b) {
+LancelotBag::LancelotBag(BaseKnight* knight, int a, int b) {
 		maxSize = 16;
 		BaseBag::createBag(knight, a, b);
 	};
+NormalBag::NormalBag(BaseKnight* knight, int a, int b) {
+	maxSize = 19;
+	BaseBag::createBag(knight, a, b);
 };
 /* * * END implementation of class BaseBag * * */
 void BaseOpponent::Win_effect(ArmyKnights* ArmyKnight) {
@@ -366,6 +352,12 @@ float BaseKnight::damage() {
 BaseKnight::~BaseKnight() {
 	delete[] bag;
 }
+LancelotKnight::LancelotKnight()
+{
+	this->knightType = LANCELOT;
+	this->base_dmg = 0.05;
+	bag = new LancelotBag(this, phoenixI, antidote);
+}
 bool LancelotKnight::knight_fight(BaseOpponent* opponent) {
 	switch (opponent->Otype)
 	{
@@ -433,6 +425,12 @@ bool LancelotKnight::knight_fight(BaseOpponent* opponent) {
 		}
 	}
 }
+DragonKnight::DragonKnight()
+	{
+		this->base_dmg = 0.075;
+		this->knightType = DRAGON;
+		bag = new DragonBag(this, phoenixI, antidote);
+	}
 bool DragonKnight::knight_fight(BaseOpponent* opponent) {
 	switch (opponent->Otype)
 	{
@@ -524,6 +522,12 @@ bool DragonKnight::knight_fight(BaseOpponent* opponent) {
 		}
 	}
 }
+PaladinKnight::PaladinKnight()
+	{
+		this->base_dmg = 0.06;
+		this->knightType = PALADIN;
+		bag = new PaladinBag(this, phoenixI, antidote);
+	}
 bool PaladinKnight::knight_fight(BaseOpponent* opponent) {
 	switch (opponent->Otype)
 	{
@@ -585,7 +589,11 @@ bool PaladinKnight::knight_fight(BaseOpponent* opponent) {
 		}
 	}
 }
-
+NormalKnight::NormalKnight()
+{
+	this->knightType = NORMAL;
+	bag = new NormalBag(this, phoenixI, antidote);
+}
 
 
 
@@ -616,9 +624,21 @@ BaseKnight* ArmyKnights::lastKnight() const {
 bool ArmyKnights::fight(BaseOpponent* opponent) {
 	do
 	{
-		if (lastKnight()->knight_fight(opponent) == 1)
-			return 1;
-		quanlity--;
+		if (opponent->Otype >= 1 && opponent->Otype <= 5) {
+			if (lastKnight()->knight_fight(opponent) == 1) {
+				opponent->Win_effect(this);
+				return 1;
+			}
+			else {
+				opponent->Lose_effect(this->lastKnight());
+				this->UseItem(lastKnight());
+				if (lastKnight()->gethp() <= 0) {
+					Reborn(lastKnight());
+					if(Reborn(lastKnight())==false)	quanlity--;
+				}
+			}
+		}
+
 	} while (quanlity > 0);
 	return 0;
 }
@@ -633,13 +653,16 @@ void ArmyKnights::UseItem(BaseKnight* knight) {
 		p = p->pNext;
 	}
 }
-void ArmyKnights::Reborn(BaseKnight* knight) {
+bool ArmyKnights::Reborn(BaseKnight* knight) {
 	UseItem(knight);
+	if (knight->gethp() > 0) return true;
 	if (knight->gethp() <= 0) {
 		if (knight->getgil() >= 100) {
 			knight->sethp(knight->getmaxhp() / 2);
 			knight->setgil(knight->getgil() - 100);
+			return true;
 		}
+		else return false;
 	}
 }
 bool ArmyKnights::hasPaladinShield() const {
