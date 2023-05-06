@@ -34,19 +34,15 @@ protected:
     BaseKnight* knight;
     Node* bag;
 public:
+    BaseBag();
     void delete_head();
     void createBag(BaseKnight* knight, int a, int b);
     virtual bool insertFirst(BaseItem* item);
     virtual BaseItem *get(ItemType itemType);
     virtual string toString() const;
     int countItem();
-    void init()
-    {
-        bag = NULL;
-    }
-    Node* getBag ()const {
-        return bag;
-    }
+    void init();
+    Node* getBag()const;
 };
 enum OpponentType {
     MadBeartype=1,
@@ -212,6 +208,7 @@ protected:
     bool poison;
     BaseBag* bag;
     KnightType knightType;
+    int phoenixI;
     double base_dmg;
 public:
     BaseKnight()
@@ -291,6 +288,7 @@ public:
     {
         this->knightType = LANCELOT;
         this->base_dmg = 0.05;
+        bag = new LancelotBag(this, phoenixI, antidote);
     }
 };
 class DragonKnight : public BaseKnight
@@ -301,6 +299,7 @@ public:
     {
         this->base_dmg = 0.075;
         this->knightType = DRAGON;
+        bag = new DragonBag(this, phoenixI, antidote);
     }
 };
 class PaladinKnight : public BaseKnight
@@ -311,6 +310,7 @@ public:
     {
         this->base_dmg = 0.06;
         this->knightType = PALADIN;
+        bag = new PaladinBag(this, phoenixI, antidote);
     }
 };
 class NormalKnight : public BaseKnight
@@ -318,6 +318,7 @@ class NormalKnight : public BaseKnight
 public:
     NormalKnight()
     {
+        bag = new NormalBag(this, phoenixI, antidote);
         this->knightType = NORMAL;
     }
 };
@@ -344,13 +345,15 @@ public:
             return;
         }
         input >> quanlity;
+        Army = new BaseKnight*[quanlity];
         int id, maxhp, level, gil, antidote, phoenixdownI;
         input >> id >> maxhp >> level >> phoenixdownI >> gil >> antidote;
         for (id = 1; id <= quanlity; id++)
         {
-            *(Army + id - 1) = BaseKnight::create(id, maxhp, level, gil, antidote, phoenixdownI);
+            BaseKnight* temp = BaseKnight::create(id, maxhp, level, gil, antidote, phoenixdownI);
+            *(Army + id - 1) = temp;
         }
-    };
+    }
     ~ArmyKnights();
     BaseKnight **Army;
     bool fight(BaseOpponent *opponent);
@@ -388,15 +391,7 @@ public:
     ItemType type;
 };
 // Kiem tra nguyen to
-bool isPrime(int x)
-{
-    if (x <= 1)
-        return 0;
-    for (int i = 2; i * i <= x; i++)
-        if (x % i == 0)
-            return 0;
-    return 1;
-}
+bool isPrime(int x);
 class antidote : public BaseItem
 {
 public:
@@ -510,27 +505,7 @@ public:
     int get(int i) const;
     ~Events();
 };
-Events::~Events() {
-    delete[] arr;
-}
-Events::Events(string s)
-{
-    ifstream input(s, ios::in);
-    input >> size;
-    arr = new int[size + 1];
-    for (int i = 0; i < size; i++)
-    {
-        input >> *(arr + i);
-    }
-};
-int Events::count() const
-{
-    return size;
-};
-int Events::get(int i) const
-{
-    return arr[i];
-};
+
 class KnightAdventure
 {
 private:
