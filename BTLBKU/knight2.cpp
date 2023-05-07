@@ -86,6 +86,7 @@ BaseItem* BaseBag::get(ItemType itemType) {
 		bag->item = NULL;
 		temp->use(this->knight);
 		delete_head();
+		num--;
 		return temp;
 	}
 	Node* p = bag;
@@ -105,7 +106,7 @@ BaseItem* BaseBag::get(ItemType itemType) {
 }
 string  BaseBag::toString() const {
 
-	string s = "Bag[count =" + to_string(num) + ";";
+	string s = "Bag[count=" + to_string(num) + ";";
 	Node* p = bag;
 	while (p != NULL) {
 		switch (p->item->type)
@@ -171,7 +172,7 @@ void BaseOpponent::Lose_effect(BaseKnight* knight) {
 	knight->sethp(knight->gethp() - this->baseDamage * (this->levelO - knight->getlevel()));
 }
 void Tornbery::Win_effect(ArmyKnights* ArmyKnight) {
-	ArmyKnight->Army[ArmyKnight->quanlity - 1]->levelup();
+	ArmyKnight->lastKnight()->levelup();
 }
 void Tornbery::Lose_effect(BaseKnight* knight) {
 	if (knight->getantidote() >= 1)
@@ -184,9 +185,10 @@ void Tornbery::Lose_effect(BaseKnight* knight) {
 	else {
 		for (int i = 0; i < 3; i++)
 			knight->DropItem();
+
+		knight->sethp(knight->gethp() - 10);
+		knight->setpoison(false);
 	}
-	knight->sethp(knight->gethp() - 10);
-	knight->setpoison(false);
 }
 void QueenOfCards::Win_effect(ArmyKnights* ArmyKnight) {
 	ArmyKnight->TakeGil(ArmyKnight->Army[ArmyKnight->quanlity - 1]->getgil() * 2);
@@ -909,6 +911,7 @@ bool Ultimecia::fight(ArmyKnights* ArmyKnight) {
 			this->hp -= knight->damage();
 			ArmyKnight->Setquanlity(ArmyKnight->Getquanlity()-1);
 		}
+		else ArmyKnight->Setquanlity(ArmyKnight->Getquanlity()-1);
 		if (hp <= 0) {
 			return 1;
 		}

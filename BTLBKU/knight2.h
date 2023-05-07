@@ -294,7 +294,7 @@ public:
         this->hp = hp;
     }
     void setlevel(int level) {
-        if (level >= 0 && level < 10) {
+        if (level >= 0 && level <= 10) {
             this->level = level;
         }
     }
