@@ -832,8 +832,9 @@ bool ArmyKnights::adventure(Events* events) {
 					}
 					else if (hasGuinevereHair() == 1 && hasPaladinShield() == 1 && hasLancelotSpear() == 1) {
 						Ultimecia* boss = new Ultimecia;
+						bool result  = boss->fight(this);
 						printInfo();
-						return boss->fight(this);
+						return result;
 					}
 					else
 					{
@@ -921,6 +922,7 @@ bool Ultimecia::fight(ArmyKnights* ArmyKnight) {
 		}
 		ArmyKnight->Setquanlity(ArmyKnight->Getquanlity() - 1);
 	}
+
 	return 0;
 }
 
