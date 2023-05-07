@@ -33,13 +33,14 @@ protected:
     int maxSize;
     BaseKnight* knight;
     Node* bag;
+    int num; 
 public:
     BaseBag();
     void delete_head();
     void createBag(BaseKnight* knight, int a, int b);
     virtual bool insertFirst(BaseItem* item);
     virtual BaseItem *get(ItemType itemType);
-    virtual string toString() const;
+    virtual string toString() const ;
     int countItem();
     void init();
     Node* getBag()const;
@@ -227,7 +228,10 @@ protected:
     int phoenixI;
     double base_dmg;
 public:
-    BaseKnight()
+    BaseKnight(){
+        this->poison = 0;
+    }
+    BaseKnight(int phoenixI,int  antidote)
     {
         this->poison = false;
     }
@@ -300,24 +304,24 @@ class LancelotKnight : public BaseKnight
 {
 public:
     bool knight_fight(BaseOpponent* opponent);
-    LancelotKnight();
+    LancelotKnight(int phoenixI, int  antidote);
 };
 class DragonKnight : public BaseKnight
 {
 public:
     bool knight_fight(BaseOpponent* opponent);
-    DragonKnight();
+    DragonKnight(int phoenixI, int  antidote);
 };
 class PaladinKnight : public BaseKnight
 {
 public:
     bool knight_fight(BaseOpponent* opponent);
-    PaladinKnight();
+    PaladinKnight(int phoenixI, int  antidote);
 };
 class NormalKnight : public BaseKnight
 {
 public:
-    NormalKnight();
+    NormalKnight(int phoenixI, int  antidote);
 };
 class ArmyKnights
 {
@@ -329,28 +333,7 @@ public:
     int quanlity;
     bool defeatOmega;
     bool defeatHades;
-    ArmyKnights(const string &file_armyknights)
-    {
-        this->PaladinShield = false;
-        this->LancelotSpear = false;
-        this->GuinevereHair = false;
-        this->ExcaliburSword = false;
-        ifstream input(file_armyknights, ios::in);
-        if (input.fail())
-        {
-            cout << "Fail";
-            return;
-        }
-        input >> quanlity;
-        Army = new BaseKnight*[quanlity];
-        int id, maxhp, level, gil, antidote, phoenixdownI;
-        for (id = 1; id <= quanlity; id++)
-        {
-            input >> maxhp >> level >> phoenixdownI >> gil >> antidote;
-            BaseKnight* temp = BaseKnight::create(id, maxhp, level, gil, antidote, phoenixdownI);
-            *(Army + id - 1) = temp;
-        }
-    }
+    ArmyKnights(const string& file_armyknights);
     ~ArmyKnights();
     BaseKnight **Army;
     bool fight(BaseOpponent *opponent);

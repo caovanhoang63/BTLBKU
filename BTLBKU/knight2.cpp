@@ -16,6 +16,7 @@ bool isPrime(int x)
 /* * * BEGIN implementation of class BaseBag * * */
 BaseBag::BaseBag(){
 	init();
+	num = 0;
 }
 void BaseBag::init()
 {
@@ -26,14 +27,14 @@ Node* BaseBag::getBag()const {
 }
 void BaseBag::createBag(BaseKnight* knight, int a, int b) {
 	this->knight = knight;
-	for (int i = 0; i <= a; i++)
+	for (int i = 0; i < a; i++)
 	{
 		phoenixdownI* temp = new phoenixdownI;
 		insertFirst(temp);
 	}
 	if (knight->getType() != 2)
 	{
-		for (int i = 0; i <= b; i++)
+		for (int i = 0; i < b; i++)
 		{
 			antidote* temp = new antidote;
 			insertFirst(temp);
@@ -76,6 +77,7 @@ bool BaseBag::insertFirst(BaseItem* item) {
 		return 0;
 	p->pNext = bag;
 	bag = p;
+	num++;
 	return 1;
 };
 BaseItem* BaseBag::get(ItemType itemType) {
@@ -102,7 +104,36 @@ BaseItem* BaseBag::get(ItemType itemType) {
 	return Item_temp;
 }
 string  BaseBag::toString() const {
-	return "Bag[count = <<>>; <list_items>]";
+
+	string s = "Bag[count =" + to_string(num) + ";";
+	Node* p = bag;
+	while (p != NULL) {
+		switch (p->item->type)
+		{
+		case 0:
+			s += "Antidote";
+			break;
+		case 1:
+			s += "PhoenixI";
+			break;
+		case 2:
+			s += "PhoenixII";
+			break;
+		case 3:
+			s += "PhoenixIII";
+			break;
+		case 4:
+			s += "PhoenixIV";
+			break;
+		default:
+			break;
+		}
+		if (p->pNext != NULL)
+			s += ",";
+		p = p->pNext;
+	}
+	s += "]";
+	return s;
 }
 DragonBag::DragonBag(BaseKnight* knight, int a, int b) {
 		maxSize = 14;
@@ -211,19 +242,19 @@ BaseKnight* BaseKnight::create(int id, int maxhp, int level, int gil, int antido
 	BaseKnight* temp;
 	if (isPrime(maxhp))
 	{
-		temp = new PaladinKnight;
+		temp = new PaladinKnight(phoenixdownI,antidote);
 	}
 	else if (maxhp == 888)
 	{
-		temp = new LancelotKnight;
+		temp = new LancelotKnight(phoenixdownI,antidote);
 	}
 	else if (maxhp == 345 || maxhp == 354 || maxhp == 435 || maxhp == 453 || maxhp == 534 || maxhp == 543)
 	{
-		temp = new DragonKnight;
+		temp = new DragonKnight(phoenixdownI,  antidote);
 	}
 	else
 	{
-		temp = new NormalKnight;
+		temp = new NormalKnight(phoenixdownI,  antidote);
 	}
 	temp->maxhp = maxhp;
 	temp->id = id;
@@ -342,7 +373,7 @@ float BaseKnight::damage() {
 BaseKnight::~BaseKnight() {
 	delete[] bag;
 }
-LancelotKnight::LancelotKnight()
+LancelotKnight::LancelotKnight(int phoenixI, int  antidote)
 {
 	this->knightType = LANCELOT;
 	this->base_dmg = 0.05;
@@ -418,7 +449,7 @@ bool LancelotKnight::knight_fight(BaseOpponent* opponent) {
 		}
 	}
 }
-DragonKnight::DragonKnight()
+DragonKnight::DragonKnight(int phoenixI, int  antidote)
 	{
 		this->base_dmg = 0.075;
 		this->knightType = DRAGON;
@@ -518,7 +549,7 @@ bool DragonKnight::knight_fight(BaseOpponent* opponent) {
 		}
 	}
 }
-PaladinKnight::PaladinKnight()
+PaladinKnight::PaladinKnight(int phoenixI, int  antidote)
 	{
 		this->base_dmg = 0.06;
 		this->knightType = PALADIN;
@@ -585,7 +616,7 @@ bool PaladinKnight::knight_fight(BaseOpponent* opponent) {
 		}
 	}
 }
-NormalKnight::NormalKnight()
+NormalKnight::NormalKnight(int phoenixI, int  antidote)
 {
 	this->knightType = NORMAL;
 	bag = new NormalBag(this, phoenixI, antidote);
@@ -615,6 +646,8 @@ void ArmyKnights::printResult(bool win) const
 	cout << (win ? "WIN" : "LOSE") << endl;
 }
 BaseKnight* ArmyKnights::lastKnight() const {
+	if (quanlity == 0)
+		return NULL;
 	return Army[quanlity - 1];
 }
 bool ArmyKnights::fight(BaseOpponent* opponent) {
@@ -812,6 +845,28 @@ void ArmyKnights::TakeItem(BaseItem* temp) {
 			break;
 	}
 }
+ArmyKnights::ArmyKnights(const string& file_armyknights)
+{
+	this->PaladinShield = false;
+	this->LancelotSpear = false;
+	this->GuinevereHair = false;
+	this->ExcaliburSword = false;
+	ifstream input(file_armyknights, ios::in);
+	if (input.fail())
+	{
+		cout << "Fail";
+		return;
+	}
+	input >> quanlity;
+	Army = new BaseKnight * [quanlity];
+	int id, maxhp, level, gil, antidote, phoenixdownI;
+	for (id = 1; id <= quanlity; id++)
+	{
+		input >> maxhp >> level >> phoenixdownI >> gil >> antidote;
+		BaseKnight* temp = BaseKnight::create(id, maxhp, level, gil, antidote, phoenixdownI);
+		*(Army + id - 1) = temp;
+	}
+}
 ArmyKnights::~ArmyKnights() {
 	delete[] Army;
 }
@@ -846,20 +901,19 @@ Ultimecia::Ultimecia() {
 }
 bool Ultimecia::fight(ArmyKnights* ArmyKnight) {
 	int quanlity = ArmyKnight->quanlity;
+	if (quanlity == 0)
+		return 0;
 	for (int i = quanlity; i > 0; i--) {
-		if (ArmyKnight->Army[i]->getType() < 3) {
-			this->hp = this->hp - ArmyKnight->Army[i]->damage();
-			ArmyKnight->quanlity - 1;
+		BaseKnight* knight = ArmyKnight->Army[i - 1];
+		if (knight->getType() < 3) {
+			this->hp -= knight->damage();
+			ArmyKnight->Setquanlity(ArmyKnight->Getquanlity()-1);
 		}
-		else ArmyKnight->quanlity - 1;
 		if (hp <= 0) {
-			ArmyKnight->printInfo();
 			return 1;
 		}
-		else if (ArmyKnight->lastKnight() == NULL) {
-			return 0;
-		}
 	}
+	return 0;
 }
 
 /* * * END implementation of class Ultimecia * * */
