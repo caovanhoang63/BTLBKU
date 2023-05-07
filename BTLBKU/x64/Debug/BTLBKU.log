@@ -7,6 +7,6 @@ C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(420): warning
 C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(520): warning C4715: 'DragonKnight::knight_fight': not all control paths return a value
 C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(587): warning C4715: 'PaladinKnight::knight_fight': not all control paths return a value
 C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(669): warning C4715: 'ArmyKnights::Reborn': not all control paths return a value
-C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(863): warning C4715: 'Ultimecia::fight': not all control paths return a value
 C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(808): warning C4715: 'ArmyKnights::adventure': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(863): warning C4715: 'Ultimecia::fight': not all control paths return a value
   BTLBKU.vcxproj -> C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\x64\Debug\BTLBKU.exe
