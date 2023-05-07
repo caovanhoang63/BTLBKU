@@ -1,15 +1,6 @@
 ﻿#include "knight2.h"
 /* * * BEGIN implementation of class BaseItem * * */
-//bool antidote::canUse(BaseKnight* knight) {
-//	if (knight->getpoison())
-//		return true;
-//	return false;
-//}
-//void antidote::use(BaseKnight* knight)
-//{
-//	knight->setpoison(false);
-//	knight->setantidote(knight->getantidote() - 1);
-//};
+
 
 bool isPrime(int x)
 {
@@ -239,6 +230,7 @@ BaseKnight* BaseKnight::create(int id, int maxhp, int level, int gil, int antido
 	{
 		temp = new NormalKnight;
 	}
+	temp->maxhp = maxhp;
 	temp->id = id;
 	temp->hp = maxhp;
 	temp->level = level;
@@ -622,24 +614,30 @@ BaseKnight* ArmyKnights::lastKnight() const {
 	return Army[quanlity - 1];
 }
 bool ArmyKnights::fight(BaseOpponent* opponent) {
-	do
+
+	while (quanlity > 0)
 	{
+		BaseKnight* cur = this->lastKnight();
 		if (opponent->Otype >= 1 && opponent->Otype <= 5) {
-			if (lastKnight()->knight_fight(opponent) == 1) {
+			if (cur->knight_fight(opponent) == 1) {
 				opponent->Win_effect(this);
+				this->UseItem(cur);
 				return 1;
 			}
 			else {
-				opponent->Lose_effect(this->lastKnight());
-				this->UseItem(lastKnight());
-				if (lastKnight()->gethp() <= 0) {
-					Reborn(lastKnight());
-					if(Reborn(lastKnight())==false)	quanlity--;
+				opponent->Lose_effect(cur);
+				this->UseItem(cur);
+				if (cur->gethp() <= 0) {
+					if(Reborn(cur)==false)
+					{
+						quanlity--;
+					}
+					return 1;
 				}
+				return 1;
 			}
 		}
-
-	} while (quanlity > 0);
+	}
 	return 0;
 }
 void ArmyKnights::UseItem(BaseKnight* knight) {
@@ -707,6 +705,7 @@ bool ArmyKnights::adventure(Events* events) {
 				break;
 			case 3:
 				temp = new LordLupin;
+				temp->setlevelO(i);
 				break;
 			case 4:
 				temp = new Elf;
@@ -831,6 +830,8 @@ Ultimecia::Ultimecia() {
 }
 bool Ultimecia::fight(ArmyKnights* ArmyKnight) {
 	int quanlity = ArmyKnight->quanlity;
+	if (quanlity == 0)
+		return 0;
 	for (int i = quanlity; i <= 0; i--) {
 		if (ArmyKnight->Army[i]->getType() < 3) {
 			this->hp -= ArmyKnight->Army[i]->damage();

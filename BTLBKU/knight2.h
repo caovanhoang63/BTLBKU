@@ -86,9 +86,8 @@ public:
     OpponentType Otype;
     virtual void Win_effect(ArmyKnights* ArmyKnight);
     virtual void Lose_effect(BaseKnight* knight);
-    int setlevelO(int i) {
+    void setlevelO(int i) {
         this->levelO = (i + eventid) % 10 + 1;
-        return this->levelO;
     };
 };
 class MadBear : public BaseOpponent
@@ -347,9 +346,9 @@ public:
         input >> quanlity;
         Army = new BaseKnight*[quanlity];
         int id, maxhp, level, gil, antidote, phoenixdownI;
-        input >> maxhp >> level >> phoenixdownI >> gil >> antidote;
         for (id = 1; id <= quanlity; id++)
         {
+            input >> maxhp >> level >> phoenixdownI >> gil >> antidote;
             BaseKnight* temp = BaseKnight::create(id, maxhp, level, gil, antidote, phoenixdownI);
             *(Army + id - 1) = temp;
         }
