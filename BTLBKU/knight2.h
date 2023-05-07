@@ -176,14 +176,12 @@ public:
     }
     void Win_effect(ArmyKnights* ArmyKnight);
     void Lose_effect(BaseKnight* knight);
-    void Effect(BaseKnight* knight);
 };
 class DurianGarden :public BaseOpponent
 {
 public:
     void Win_effect(ArmyKnights* ArmyKnight);
     void Lose_effect(BaseKnight* knight);
-    void Effect(BaseKnight* knight);
     DurianGarden() {
         this->eventid = 9;
         this->Otype = DurianGardentype;
@@ -365,6 +363,12 @@ public:
     bool hasExcaliburSword() const;
     void printInfo() const;
     void printResult(bool win) const;
+    void Setquanlity(int quanlity) {
+       this->quanlity = quanlity;
+    }
+    int Getquanlity() {
+        return this->quanlity;
+    }
     bool getdefeatOmega() {
         return this->defeatOmega;
     }
@@ -523,7 +527,6 @@ private:
     float hp;
 public:
     Ultimecia();
-    // 1 win -  0 lose
      bool fight(ArmyKnights* ArmyKnight);
 };
 #endif // __KNIGHT2_H__

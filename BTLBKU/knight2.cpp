@@ -121,7 +121,7 @@ DragonBag::DragonBag(BaseKnight* knight, int a, int b) {
 		return 1;
 	};
 PaladinBag::PaladinBag(BaseKnight* knight, int a, int b){
-		maxSize = INT_MAX;
+		maxSize = 9999;
 		BaseBag::createBag(knight, a, b);
 	};
 LancelotBag::LancelotBag(BaseKnight* knight, int a, int b) {
@@ -134,7 +134,6 @@ NormalBag::NormalBag(BaseKnight* knight, int a, int b) {
 };
 /* * * END implementation of class BaseBag * * */
 void BaseOpponent::Win_effect(ArmyKnights* ArmyKnight) {
-	ArmyKnight->Army[ArmyKnight->quanlity - 1]->levelup();
 	ArmyKnight->TakeGil(this->gil);
 }
 void BaseOpponent::Lose_effect(BaseKnight* knight) {
@@ -149,34 +148,33 @@ void Tornbery::Lose_effect(BaseKnight* knight) {
 		knight->setantidote(knight->getantidote() - 1);
 		BaseItem* temp = knight->getBag()->get(Antidote);
 		delete temp;
+		knight->setpoison(false);
 	}
 	else {
 		for (int i = 0; i < 3; i++)
 			knight->DropItem();
 	}
 	knight->sethp(knight->gethp() - 10);
+	knight->setpoison(false);
 }
 void QueenOfCards::Win_effect(ArmyKnights* ArmyKnight) {
 	ArmyKnight->TakeGil(ArmyKnight->Army[ArmyKnight->quanlity - 1]->getgil() * 2);
 }
 void QueenOfCards::Lose_effect(BaseKnight* knight) {
+	if (knight->getType() == PALADIN) return;
 	knight->setgil(knight->getgil() / 2);
 }
 void NinaDeRings::Win_effect(ArmyKnights* ArmyKnight) {
-	return;
+	if (ArmyKnight->lastKnight()->gethp() < ArmyKnight->lastKnight()->getmaxhp() / 3)
+	{
+		ArmyKnight->lastKnight()->setgil(ArmyKnight->lastKnight()->getgil() - 50);
+		ArmyKnight->lastKnight()->sethp(ArmyKnight->lastKnight()->gethp() + ArmyKnight->lastKnight()->getmaxhp() / 5);
+	}
 }
 void NinaDeRings::Lose_effect(BaseKnight* knight) {
 	return;
 }
-void NinaDeRings::Effect(BaseKnight* knight) {
-	if (knight->getgil() < 50)
-		return;
-	else if (knight->gethp() < knight->getmaxhp() / 3)
-	{
-		knight->setgil(knight->getgil() - 50);
-		knight->sethp(knight->gethp() + knight->getmaxhp() / 5);
-	}
-}
+
 void OmegaWeapon::Win_effect(ArmyKnights* ArmyKnight) {
 	ArmyKnight->defeatOmega = 1;
 	ArmyKnight->lastKnight()->setlevel(10);
@@ -193,13 +191,10 @@ void Hades::Lose_effect(BaseKnight* knight) {
 	knight->sethp(0);
 }
 void DurianGarden::Win_effect(ArmyKnights* ArmyKnight) {
-	return;
+	ArmyKnight->lastKnight()->sethp(ArmyKnight->lastKnight()->getmaxhp());
 }
 void DurianGarden::Lose_effect(BaseKnight* knight) {
 	return;
-}
-void DurianGarden::Effect(BaseKnight* knight) {
-	knight->sethp(knight->getmaxhp());
 }
 /* * * BEGIN implementation of class BaseKnight * * */
 string BaseKnight::toString() const
@@ -317,6 +312,9 @@ bool BaseKnight::knight_fight(BaseOpponent* opponent) {
 			return true;
 			break;
 		}
+	case 9:
+		return true;
+		break;
 	case 10:
 		if ((this->getlevel() == 10 && this->gethp() == this->getmaxhp())) {
 			return true;
@@ -396,6 +394,9 @@ bool LancelotKnight::knight_fight(BaseOpponent* opponent) {
 			return true;
 			break;
 		}
+	case 9:
+		return true;
+		break;
 	case 10:
 		if ((this->getlevel() == 10 && this->gethp() == this->getmaxhp())) {
 			return true;
@@ -499,6 +500,9 @@ bool DragonKnight::knight_fight(BaseOpponent* opponent) {
 			return true;
 			break;
 		}
+	case 9:
+		return true;
+		break;
 	case 10:
 		return true;
 		break;
@@ -558,14 +562,14 @@ bool PaladinKnight::knight_fight(BaseOpponent* opponent) {
 			break;
 		}
 	case 8:
-		if (this->getgil() < 50) {
-			return false;
-			break;
-		}
-		else if (this->gethp() < this->getmaxhp() / 3 && this->getgil() >= 50) {
+		if (this->gethp() < this->getmaxhp() / 3) {
+			this->setgil(this->getgil() + 50);
 			return true;
 			break;
 		}
+	case 9:
+		return true;
+		break;
 	case 10:
 		return true;
 		break;
@@ -618,7 +622,7 @@ bool ArmyKnights::fight(BaseOpponent* opponent) {
 	while (quanlity > 0)
 	{
 		BaseKnight* cur = this->lastKnight();
-		if (opponent->Otype >= 1 && opponent->Otype <= 5) {
+		if (opponent->Otype >= 1 && opponent->Otype <=11) {
 			if (cur->knight_fight(opponent) == 1) {
 				opponent->Win_effect(this);
 				this->UseItem(cur);
@@ -699,9 +703,11 @@ bool ArmyKnights::adventure(Events* events) {
 			{
 			case 1:
 				temp = new MadBear;
+				temp->setlevelO(i);
 				break;
 			case 2:
 				temp = new Bandit;
+				temp->setlevelO(i);
 				break;
 			case 3:
 				temp = new LordLupin;
@@ -709,15 +715,19 @@ bool ArmyKnights::adventure(Events* events) {
 				break;
 			case 4:
 				temp = new Elf;
+				temp->setlevelO(i);
 				break;
 			case 5:
 				temp = new Troll;
+				temp->setlevelO(i);
 				break;
 			case 6:
 				temp = new Tornbery;
+				temp->setlevelO(i);
 				break;
 			case 7:
 				temp = new QueenOfCards;
+				temp->setlevelO(i);
 				break;
 			case 8:
 				temp = new NinaDeRings;
@@ -773,6 +783,7 @@ bool ArmyKnights::adventure(Events* events) {
 				break;
 			case 97:
 				GuinevereHair = 1;
+				break;
 			case 98: {
 				if (hasGuinevereHair() == 1 && hasPaladinShield() == 1 && hasLancelotSpear() == 1)
 					ExcaliburSword = 1;
@@ -780,10 +791,15 @@ bool ArmyKnights::adventure(Events* events) {
 			}
 			case 99:
 			{
-				if (hasExcaliburSword())
+				if (hasExcaliburSword()) {
+					printInfo();
 					return 1;
-				Ultimecia* boss = new Ultimecia;
-				return boss->fight(this);
+				}
+				else if (hasGuinevereHair() == 1 && hasPaladinShield() == 1 && hasLancelotSpear() == 1) {
+					Ultimecia* boss = new Ultimecia;
+					boss->fight(this);
+				}
+				
 			}
 			}
 		}
@@ -830,16 +846,20 @@ Ultimecia::Ultimecia() {
 }
 bool Ultimecia::fight(ArmyKnights* ArmyKnight) {
 	int quanlity = ArmyKnight->quanlity;
-	if (quanlity == 0)
-		return 0;
-	for (int i = quanlity; i <= 0; i--) {
+	for (int i = quanlity; i > 0; i--) {
 		if (ArmyKnight->Army[i]->getType() < 3) {
-			this->hp -= ArmyKnight->Army[i]->damage();
+			this->hp = this->hp - ArmyKnight->Army[i]->damage();
+			ArmyKnight->quanlity - 1;
+		}
+		else ArmyKnight->quanlity - 1;
+		if (hp <= 0) {
+			ArmyKnight->printInfo();
+			return 1;
+		}
+		else if (ArmyKnight->lastKnight() == NULL) {
+			return 0;
 		}
 	}
-	if (hp <= 0)
-		return 1;
-	return 0;
 }
 
 /* * * END implementation of class Ultimecia * * */
