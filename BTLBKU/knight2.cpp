@@ -49,6 +49,7 @@ void BaseBag::delete_head() {
 	bag = bag->pNext;
 	p->pNext = NULL;
 	delete p;
+	num--;
 }
 Node* createNode(BaseItem* item)
 {
@@ -86,7 +87,6 @@ BaseItem* BaseBag::get(ItemType itemType) {
 		bag->item = NULL;
 		temp->use(this->knight);
 		delete_head();
-		num--;
 		return temp;
 	}
 	Node* p = bag;
@@ -150,6 +150,7 @@ bool DragonBag::insertFirst(BaseItem* item) {
 		return 0;
 	p->pNext = bag;
 	bag = p;
+	num++;
 	return 1;
 };
 PaladinBag::PaladinBag(BaseKnight* knight, int a, int b) {
@@ -191,7 +192,7 @@ void Tornbery::Lose_effect(BaseKnight* knight) {
 	}
 }
 void QueenOfCards::Win_effect(ArmyKnights* ArmyKnight) {
-	ArmyKnight->TakeGil(ArmyKnight->Army[ArmyKnight->quanlity - 1]->getgil() * 2);
+	ArmyKnight->TakeGil(ArmyKnight->Army[ArmyKnight->quanlity - 1]->getgil()*1);
 }
 void QueenOfCards::Lose_effect(BaseKnight* knight) {
 	if (knight->getType() == PALADIN) return;
@@ -604,10 +605,16 @@ bool PaladinKnight::knight_fight(BaseOpponent* opponent) {
 		return true;
 		break;
 	case 10:
-		return true;
-		break;
+		if ((this->getlevel() == 10 && this->gethp() == this->getmaxhp())) {
+			return true;
+			break;
+		}
+		else {
+			return false;
+			break;
+		}
 	case 11:
-		if (this->getlevel() > 8) {
+		if (this->getlevel() >= 8) {
 
 			return true;
 			break;
@@ -634,7 +641,7 @@ void ArmyKnights::printInfo() const
 	if (this->count() > 0)
 	{
 		BaseKnight* lknight = lastKnight(); // last knight
-		cout << ";" << lknight->toString();
+		cout << ";"<< lknight->toString();
 	}
 	cout << ";PaladinShield:" << this->hasPaladinShield()
 		<< ";LancelotSpear:" << this->hasLancelotSpear()
@@ -786,28 +793,19 @@ bool ArmyKnights::adventure(Events* events) {
 				{
 
 					BaseItem* temp = new phoenixdownII;
-					if (temp->canUse(lastKnight()))
-						temp->use(lastKnight());
-					else
-						TakeItem(temp);
+					TakeItem(temp);
 					break;
 				}
 				case 113:
 				{
 					BaseItem* temp = new phoenixdownIII;
-					if (temp->canUse(lastKnight()))
-						temp->use(lastKnight());
-					else
-						TakeItem(temp);
+					TakeItem(temp);
 					break;
 				}
 				case 114:
 				{
 					BaseItem* temp = new phoenixdownIV;
-					if (temp->canUse(lastKnight()))
-						temp->use(lastKnight());
-					else
-						TakeItem(temp);
+					TakeItem(temp);
 					break;
 				}
 				case 95:
@@ -832,8 +830,9 @@ bool ArmyKnights::adventure(Events* events) {
 					}
 					else if (hasGuinevereHair() == 1 && hasPaladinShield() == 1 && hasLancelotSpear() == 1) {
 						Ultimecia* boss = new Ultimecia;
+						bool result  = boss->fight(this);
 						printInfo();
-						return boss->fight(this);
+						return result;
 					}
 					else
 					{
@@ -845,12 +844,22 @@ bool ArmyKnights::adventure(Events* events) {
 			}
 		}
 		printInfo();
+		if (lastKnight() == NULL) {
+			return 0;
+			break;
+		}
 	}
 }
 void ArmyKnights::TakeItem(BaseItem* temp) {
 	for (int i = quanlity; i > 0; i--) {
 		if (Army[i - 1]->getBag()->insertFirst(temp))
 			break;
+	}
+}
+void ArmyKnights::deleteknight(int id) {
+	delete this->Army[id];
+	for (int i = id; i < quanlity ; i++) {
+		Army[i] = Army[i + 1];
 	}
 }
 ArmyKnights::ArmyKnights(const string& file_armyknights)
@@ -909,18 +918,27 @@ Ultimecia::Ultimecia() {
 }
 bool Ultimecia::fight(ArmyKnights* ArmyKnight) {
 	int quanlity = ArmyKnight->quanlity;
+	int temp = ArmyKnight->quanlity;
 	if (quanlity == 0)
 		return 0;
 	for (int i = quanlity; i > 0; i--) {
 		BaseKnight* knight = ArmyKnight->Army[i - 1];
-		if (knight->getType() < 3) {
+		if (knight->getType() == NORMAL) {
+			continue;
+		}
+		if (knight->getType() != NORMAL) {
 			this->hp -= knight->damage();
+			if (hp > 0) {
+				ArmyKnight->deleteknight(i-1);
+				temp--;
+			}
 		}
 		if (hp <= 0) {
+			ArmyKnight->Setquanlity(temp);
 			return 1;
 		}
-		ArmyKnight->Setquanlity(ArmyKnight->Getquanlity() - 1);
 	}
+
 	return 0;
 }
 

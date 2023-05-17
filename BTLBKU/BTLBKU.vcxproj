@@ -135,7 +135,6 @@
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\A2_initial-1\tc1_armyknights" />
     <None Include="tc1_armyknights" />
     <None Include="tc1_events" />
   </ItemGroup>

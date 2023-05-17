@@ -1,11 +1,9 @@
 ﻿  knight2.cpp
-C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(373,20): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  main.cpp
-  Generating Code...
-C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(371): warning C4715: 'BaseKnight::knight_fight': not all control paths return a value
-C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(453): warning C4715: 'LancelotKnight::knight_fight': not all control paths return a value
-C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(553): warning C4715: 'DragonKnight::knight_fight': not all control paths return a value
-C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(620): warning C4715: 'PaladinKnight::knight_fight': not all control paths return a value
-C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(704): warning C4715: 'ArmyKnights::Reborn': not all control paths return a value
-C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(849): warning C4715: 'ArmyKnights::adventure': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(374,20): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(372): warning C4715: 'BaseKnight::knight_fight': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(454): warning C4715: 'LancelotKnight::knight_fight': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(554): warning C4715: 'DragonKnight::knight_fight': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(627): warning C4715: 'PaladinKnight::knight_fight': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(711): warning C4715: 'ArmyKnights::Reborn': not all control paths return a value
+C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\BTLBKU\knight2.cpp(852): warning C4715: 'ArmyKnights::adventure': not all control paths return a value
   BTLBKU.vcxproj -> C:\Users\THIEN BACH\Desktop\BTL 2\Github\BTLBKU\x64\Debug\BTLBKU.exe

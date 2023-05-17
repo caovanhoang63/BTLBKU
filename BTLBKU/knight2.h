@@ -243,6 +243,7 @@ public:
     string toString() const;
     void DropItem() {
         bag->delete_head();
+
     }
     int const getmaxhp()
     {
@@ -368,6 +369,7 @@ public:
     void TakeItem(BaseItem* Item);
     void UseItem(BaseKnight* knight);
     bool Reborn(BaseKnight* knight);
+    void deleteknight(int id);
 };
 class BaseItem
 {
@@ -425,7 +427,7 @@ public:
     }
     bool canUse(BaseKnight* knight)
     {
-        if (knight->gethp() < (knight->gethp() / 4))
+        if (knight->gethp() < (knight->getmaxhp() / 4))
             return true;
         else
             return false;
@@ -444,7 +446,7 @@ public:
     }
     bool canUse(BaseKnight* knight)
     {
-        if (knight->gethp() < (knight->gethp() / 3))
+        if (knight->gethp() < (knight->getmaxhp() / 3))
             return true;
         else
             return false;
@@ -466,7 +468,7 @@ public:
     }
     bool canUse(BaseKnight* knight)
     {
-        if (knight->gethp() < (knight->gethp() / 2))
+        if (knight->gethp() <= (knight->getmaxhp() / 2))
             return true;
         else
             return false;
